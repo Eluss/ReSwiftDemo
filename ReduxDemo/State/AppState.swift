@@ -10,7 +10,6 @@ import Foundation
 import ReSwift
 import ReSwiftRouter
 
-struct AppState: StateType, HasNavigationState {
+struct AppState: StateType {
     var mainText: String
-    var navigationState: NavigationState
 }

@@ -13,8 +13,7 @@ import ReSwiftRouter
 struct AppReducer: Reducer {
     func handleAction(action: Action, state: AppState?) -> AppState {
         return AppState(
-            mainText: mainTextReducer(action, text: state?.mainText),
-            navigationState:  NavigationReducer.handleAction(action, state: state?.navigationState)
+            mainText: mainTextReducer(action, text: state?.mainText)
         )
     }
 }
