@@ -20,7 +20,7 @@ struct MainTextReset: StandardActionConvertible {
     init(_ standardAction: StandardAction) {}
     
     func toStandardAction() -> StandardAction {
-        return StandardAction(type: MainTextReset.type, payload: [:], isTypedAction: true)
+        return StandardAction(type: MainTextReset.type, payload: [:], isTypedAction: false)
     }
 }
 
