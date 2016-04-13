@@ -5,3 +5,4 @@ use_frameworks!
 
 pod 'ReSwift'
 pod 'ReSwiftRouter'
+pod 'ReSwiftRecorder'

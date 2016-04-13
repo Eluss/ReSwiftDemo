@@ -8,6 +8,11 @@
 
 import Foundation
 import ReSwift
+import ReSwiftRecorder
+
+let mainControllerActionTypeMap: TypeMap = [MainTextReset.type: MainTextReset.self,
+                                      MainTextChange.type: MainTextChange.self,
+                                      InputTextFieldChange.type: InputTextFieldChange.self]
 
 struct MainTextReset: StandardActionConvertible {
     static let type = "MAIN_TEXT_RESET"

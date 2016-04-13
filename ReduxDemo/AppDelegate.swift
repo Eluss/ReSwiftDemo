@@ -9,10 +9,13 @@
 import UIKit
 import ReSwift
 import ReSwiftRouter
+import ReSwiftRecorder
 
-var mainStore = Store<AppState>(
+var mainStore = RecordingMainStore<AppState>(
     reducer: AppReducer(),
-    state: nil
+    state: nil,
+    typeMaps: [mainControllerTypeMap],
+    recording: "recording.json"
 )
 
 @UIApplicationMain
