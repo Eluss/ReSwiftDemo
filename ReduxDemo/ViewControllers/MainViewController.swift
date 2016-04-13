@@ -13,7 +13,7 @@ import ReSwiftRouter
 class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate {
     
     static let identifier = "MainViewController"
-    
+    var lastState: AppState!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
 
@@ -27,6 +27,7 @@ class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate
     }
     
     func newState(state: AppState) {
+        lastState = state
         textLabel.text = state.mainText
         inputTextField.text = state.inputTextFieldText
     }
@@ -36,7 +37,7 @@ class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate
     }
     
     @IBAction func addTextAction(sender: UIButton) {
-        mainStore.dispatch(MainTextChange(inputTextField.text!))
+        mainStore.dispatch(MainTextChange(lastState.inputTextFieldText))
     }
     
     @IBAction func ResetTextAction(sender: UIButton) {
