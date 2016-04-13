@@ -41,15 +41,13 @@ struct InputTextFieldChange: StandardActionConvertible {
     
 }
 
-struct MainTextChange {
+struct MainTextChange: StandardActionConvertible {
     static let type = "MAIN_TEXT_CHANGE"
     let text: String
     init(_ text: String) {
         self.text = text
     }
-}
-
-extension MainTextChange: StandardActionConvertible {
+    
     init(_ standardAction: StandardAction) {
         self.text = standardAction.payload!["text"] as! String
     }
@@ -57,5 +55,5 @@ extension MainTextChange: StandardActionConvertible {
     func toStandardAction() -> StandardAction {
         return StandardAction(type: MainTextChange.type, payload: ["text": text], isTypedAction: true)
     }
-}
 
+}
