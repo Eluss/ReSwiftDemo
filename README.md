@@ -2,4 +2,4 @@
 Personal ReSwift Journey, I'll be adding more and more features here to fully understand the concept
 
 
-Run `Pod install` to install pods
+Run `pod install` to install pods and use Workspace!
