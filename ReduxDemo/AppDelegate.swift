@@ -14,7 +14,7 @@ import ReSwiftRecorder
 var mainStore = RecordingMainStore<AppState>(
     reducer: AppReducer(),
     state: nil,
-    typeMaps: [mainControllerTypeMap],
+    typeMaps: [mainControllerActionTypeMap],
     recording: "recording.json"
 )
 
@@ -34,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
+        
+        mainStore.rewindControlYOffset = 150
+        mainStore.window = window
         
         return true
     }
