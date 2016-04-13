@@ -19,6 +19,23 @@ struct MainTextReset: StandardActionConvertible {
     }
 }
 
+struct InputTextFieldChange: StandardActionConvertible {
+    static let type = "INPUT_TEXT_CHANGE"
+    let text: String
+    init(_ text: String) {
+        self.text = text
+    }
+    
+    init(_ standardAction: StandardAction) {
+        self.text = standardAction.payload!["text"] as! String
+    }
+    
+    func toStandardAction() -> StandardAction {
+        return StandardAction(type: InputTextFieldChange.type, payload: ["text": text], isTypedAction: true)
+    }
+    
+}
+
 struct MainTextChange {
     static let type = "MAIN_TEXT_CHANGE"
     let text: String

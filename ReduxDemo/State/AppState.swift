@@ -12,4 +12,5 @@ import ReSwiftRouter
 
 struct AppState: StateType {
     var mainText: String
+    var inputTextFieldText: String
 }

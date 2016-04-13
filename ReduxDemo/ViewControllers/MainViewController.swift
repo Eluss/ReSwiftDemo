@@ -10,14 +10,30 @@ import Foundation
 import ReSwift
 import ReSwiftRouter
 
-class MainViewController: UIViewController, StoreSubscriber {
+class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate {
     
     static let identifier = "MainViewController"
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
+
+    override func viewWillAppear(animated: Bool) {
+        mainStore.subscribe(self)
+        inputTextField.addTarget(self, action: #selector(self.inputTextFieldDidChange(_:)), forControlEvents: .EditingChanged)
+    }
     
+    override func viewWillDisappear(animated: Bool) {
+        mainStore.unsubscribe(self)
+    }
     
+    func newState(state: AppState) {
+        textLabel.text = state.mainText
+        inputTextField.text = state.inputTextFieldText
+    }
+    
+    func inputTextFieldDidChange(sender: UITextField) {
+        mainStore.dispatch(InputTextFieldChange(sender.text!))
+    }
     
     @IBAction func addTextAction(sender: UIButton) {
         mainStore.dispatch(MainTextChange(inputTextField.text!))
@@ -27,16 +43,9 @@ class MainViewController: UIViewController, StoreSubscriber {
         mainStore.dispatch(MainTextReset())
     }
     
-    func newState(state: AppState) {
-        textLabel.text = state.mainText
-    }
     
-    override func viewWillAppear(animated: Bool) {
-        mainStore.subscribe(self)
-    }
     
-    override func viewWillDisappear(animated: Bool) {
-        mainStore.unsubscribe(self)
-    }
+    
+    
     
 }

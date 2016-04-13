@@ -13,7 +13,8 @@ import ReSwiftRouter
 struct AppReducer: Reducer {
     func handleAction(action: Action, state: AppState?) -> AppState {
         return AppState(
-            mainText: mainTextReducer(action, text: state?.mainText)
+            mainText: mainTextReducer(action, text: state?.mainText),
+            inputTextFieldText: inputTextFieldReducer(action, text: state?.inputTextFieldText)
         )
     }
 }
@@ -25,6 +26,19 @@ func mainTextReducer(action: Action, text: String?) -> String {
     case _ as MainTextReset:
         text = ""
     case let action as MainTextChange:
+        text = action.text
+    default:
+        break
+    }
+    
+    return text
+}
+
+func inputTextFieldReducer(action: Action, text: String?) -> String {
+    var text = text ?? ""
+    
+    switch action {
+    case let action as InputTextFieldChange:
         text = action.text
     default:
         break
