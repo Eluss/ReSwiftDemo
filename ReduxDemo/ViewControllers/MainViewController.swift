@@ -10,9 +10,10 @@ import Foundation
 import ReSwift
 import ReSwiftRouter
 
-class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate {
+class MainViewController: UIViewController, StoreSubscriber, Routable {
     
     static let identifier = "MainViewController"
+    var secondViewController: Routable!
     var lastState: AppState!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
@@ -45,8 +46,21 @@ class MainViewController: UIViewController, StoreSubscriber, UITextFieldDelegate
     }
     
     
+    @IBAction func nextPageAction(sender: UIButton) {
+        mainStore.dispatch(
+            SetRouteAction([MainViewController.identifier, SecondViewController.identifier])
+        )
+    }
     
+    func pushRouteSegment(routeElementIdentifier: RouteElementIdentifier, animated: Bool, completionHandler: RoutingCompletionHandler) -> Routable {
+        secondViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SecondViewController") as? Routable
+        
+        presentViewController(secondViewController as! UIViewController, animated: false, completion: completionHandler)
+        
+        return secondViewController
+    }
     
-    
-    
+    func popRouteSegment(routeElementIdentifier: RouteElementIdentifier, animated: Bool, completionHandler: RoutingCompletionHandler) {
+        dismissViewControllerAnimated(false, completion: completionHandler)
+    }
 }

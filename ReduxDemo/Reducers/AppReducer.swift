@@ -14,7 +14,8 @@ struct AppReducer: Reducer {
     func handleAction(action: Action, state: AppState?) -> AppState {
         return AppState(
             mainText: mainTextReducer(action, text: state?.mainText),
-            inputTextFieldText: inputTextFieldReducer(action, text: state?.inputTextFieldText)
+            inputTextFieldText: inputTextFieldReducer(action, text: state?.inputTextFieldText),
+            navigationState: NavigationReducer.handleAction(action, state: state?.navigationState)
         )
     }
 }
